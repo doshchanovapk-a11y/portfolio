@@ -1,23 +1,182 @@
+/* --- ПЕРЕМЕННЫЕ --- */
+:root {
+    --primary: #2563eb;
+    --accent: #9333ea;
+    --success: #25d366;
+    --bg: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --nav-height: 80px;
+}
+
+/* --- ОБЩИЕ СТИЛИ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top right, #eef2ff, #ffffff, #f1f5f9);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- ПУНКТ КУРАТОРА: ОТСТУПЫ МЕЖДУ БЛОКАМИ (100px) --- */
+section {
+    padding: 100px 0; /* Создает 100px между контентом блоков */
+    scroll-margin-top: var(--nav-height);
+}
+
+/* --- ПУНКТ КУРАТОРА: ОТСТУП ОТ ЗАГОЛОВКА (50px) --- */
+section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px; /* Строго по заданию */
+    position: relative;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- STICKY NAVIGATION --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    height: var(--nav-height);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+/* --- HERO SECTION --- */
+.hero {
+    text-align: center;
+    padding: 120px 0;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.counters {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.counter-item h2 {
+    font-size: 2.5rem;
+    -webkit-text-fill-color: var(--primary); /* Отмена градиента для цифр */
+}
+
+/* --- SKILLS (FLEXBOX) --- */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.skill-card {
+    background: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    font-weight: bold;
+    color: var(--primary);
+    border: 1px solid #e2e8f0;
+}
+
+/* --- PRICING CARDS (GRID) --- */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.price-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.price-card.featured {
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
+}
+
+.price-card.selected {
+    border: 3px solid var(--success) !important;
+    background-color: #f0fff4;
+}
+
+/* ПУНКТ КУРАТОРА: ОТСТУП 5px ОТ ТЕКСТА ДО КНОПКИ */
+.price-card ul {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
 .btn-select {
-    margin-top: 5px; /* Строго по заданию */
+    margin-top: 5px; /* Строго 5px */
     width: 100%;
     padding: 15px;
     border-radius: 12px;
     border: none;
     background: #f1f5f9;
-    font-weight: 700;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
-}
-
-.price-card.selected {
-    border: 3px solid var(--success-color) !important;
 }
 
 /* --- GALLERY (GRID) --- */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
@@ -37,20 +196,18 @@
 }
 
 .accordion-item {
+    background: white;
     margin-bottom: 15px;
     border-radius: 16px;
-    background: white;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
-
 .accordion-header {
     padding: 24px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .accordion-content {
@@ -74,7 +231,6 @@
     max-width: 90%;
     max-height: 80%;
     border-radius: 10px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
 .close-btn {
@@ -87,7 +243,7 @@
 
 /* --- АДАПТИВНОСТЬ --- */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* Для простоты на мобильных */
-    .hero h1 { font-size: 2.8rem; }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2.5rem; }
     .counters { flex-direction: column; gap: 30px; }
 }
