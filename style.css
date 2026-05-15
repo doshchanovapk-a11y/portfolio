@@ -1,0 +1,99 @@
+/* ОБЩИЕ НАСТРОЙКИ */
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* 1. ОТСТУПЫ МЕЖДУ БЛОКАМИ 100PX */
+section { padding: 100px 0; }
+
+/* 2. ОТСТУП ОТ ЗАГОЛОВКА ДО ТЕКСТА 50PX */
+section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #2563eb, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* STICKY NAVIGATION */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { text-decoration: none; color: #1e293b; font-weight: bold; }
+
+/* ГАЛЕРЕЯ (GRID) */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item img {
+    width: 100%; height: 250px; object-fit: cover;
+    border-radius: 15px; cursor: pointer; transition: 0.3s;
+}
+
+/* ТАРИФЫ (GRID) */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.price-card {
+    background: white; padding: 40px; border-radius: 20px;
+    text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* 3. ОТСТУП КНОПКИ В ТАРИФАХ 5PX */
+.price-card ul { list-style: none; margin-bottom: 25px; }
+.btn-select {
+    margin-top: 5px; /* Строго 5px */
+    width: 100%; padding: 12px; border-radius: 10px;
+    border: none; background: #2563eb; color: white; cursor: pointer;
+}
+
+/* FAQ (ACCORDION) */
+.accordion-item { background: white; margin-bottom: 10px; border-radius: 10px; overflow: hidden; }
+.accordion-header { padding: 20px; cursor: pointer; font-weight: bold; background: #fff; border-bottom: 1px solid #eee; }
+.accordion-content { display: none; padding: 20px; color: #64748b; }
+
+/* LIGHTBOX */
+.lightbox {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;
+}
+.lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+.close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 3rem; cursor: pointer; }
+
+/* АНИМИРОВАННЫЕ СЧЕТЧИКИ */
+.counters { display: flex; justify-content: center; gap: 50px; margin-top: 20px; }
+.counter-item h2 { font-size: 3rem; color: #2563eb; }
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .counters { flex-direction: column; text-align: center; }
+}
