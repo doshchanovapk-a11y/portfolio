@@ -1,0 +1,324 @@
+/* Переменные для дизайна */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --accent: #25d366;
+    --bg: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --nav-height: 80px;
+}
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 3. Sticky Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    height: var(--nav-height);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Секции */
+section {
+   /* --- 1. Отступы между блоками (100px) --- */
+section {
+    padding: 100px 0; /* Верхний и нижний отступ между смысловыми блоками */
+    scroll-margin-top: 80px;
+}
+
+/* --- 2. Отступы от заголовка до контента (50px) --- */
+section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px; /* Фиксированный отступ до контента */
+    position: relative;
+    color: var(--text-main);
+}
+
+/* Линия под заголовком для эксклюзивности */
+section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* --- 3. Эксклюзивность: Карточки в стиле Glassmorphism --- */
+.about-card, .price-card, .accordion-item {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px); /* Эффект размытия */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* --- 4. Отступы в тарифах (5-10px) --- */
+.price-card p {
+    margin-bottom: 15px; /* Отступ текста от цены */
+}
+
+.price-card ul {
+    list-style: none;
+    margin-bottom: 25px; /* Отступ от списка до кнопки */
+}
+
+.btn-select {
+    margin-top: 5px; /* Тот самый минимальный отступ по заданию */
+}
+
+/* Добавим красивый фон для всего сайта, чтобы уйти от "типового" белого */
+body {
+    background: radial-gradient(circle at top right, #eef2ff, #ffffff, #f1f5f9);
+}
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    text-align: center;
+    padding: 120px 0;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+/* 5. Animated Counters */
+.counters {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.counter-item h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+/* Skills (Flexbox) */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.skill-card {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    font-weight: bold;
+    color: var(--primary);
+    border: 1px solid #e2e8f0;
+}
+
+/* 4. Pricing Cards (Grid) */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.price-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.price-card.featured {
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 20px 0;
+    color: var(--text-main);
+}
+
+/* 1. Lightbox Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.02);
+}
+
+/* 2. Accordion FAQ */
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.accordion-header {
+    padding: 20px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.accordion-header:hover {
+    background: #f1f5f9;
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 20px 20px;
+    color: var(--text-muted);
+}
+
+/* Кнопки */
+.btn-main, .btn-select, .btn-wa {
+    padding: 12px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+.btn-main { background: var(--primary); color: white; }
+.btn-select { background: #f1f5f9; color: var(--text-main); width: 100%; }
+.price-card.featured .btn-select { background: var(--primary); color: white; }
+.btn-wa { background: var(--accent); color: white; margin-top: 15px; }
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox img { max-width: 85%; max-height: 85%; border-radius: 10px; }
+
+.close-btn {
+    position: absolute;
+    top: 30px; right: 50px;
+    color: white; font-size: 3rem; cursor: pointer;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2.5rem; }
+    .counters { flex-direction: column; gap: 20px; }
+}
+/* Стиль для выбранной карточки */
+.price-card.selected {
+    border: 3px solid #25d366 !important; /* Ярко-зеленый цвет как у WhatsApp */
+    transform: scale(1.05);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    background-color: #f0fff4; /* Очень светлый зеленый оттенок */
+}
+
+/* Изменим текст кнопки при выборе */
+.price-card.selected .btn-select {
+    background-color: #25d366;
+    color: white;
+    content: "Выбрано";
+}
