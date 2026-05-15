@@ -1,49 +1,126 @@
-/* ОБЩИЕ НАСТРОЙКИ */
-* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+/* --- БАЗОВЫЕ НАСТРОЙКИ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f8fafc;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8fafc;
     color: #1e293b;
     line-height: 1.6;
 }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-/* 1. ОТСТУПЫ МЕЖДУ БЛОКАМИ 100PX */
-section { padding: 100px 0; }
+/* --- 1. ПУНКТ КУРАТОРА: ОТСТУПЫ МЕЖДУ БЛОКАМИ (100px) --- */
+section {
+    padding: 100px 0; /* Верхний и нижний отступы по 100px */
+}
 
-/* 2. ОТСТУП ОТ ЗАГОЛОВКА ДО ТЕКСТА 50PX */
+/* --- 2. ПУНКТ КУРАТОРА: ОТСТУП ОТ ЗАГОЛОВКА ДО КОНТЕНТА (50px) --- */
 section h2 {
-    text-align: center;
-    margin-bottom: 50px;
     font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px; /* Фиксированный отступ по ТЗ */
     background: linear-gradient(90deg, #2563eb, #9333ea);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* STICKY NAVIGATION */
+/* --- ЭКСКЛЮЗИВНАЯ НАВИГАЦИЯ (Sticky) --- */
 .navbar {
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.9);
+    height: 80px;
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    width: 100%;
 }
 
-.nav-links { display: flex; list-style: none; gap: 20px; }
-.nav-links a { text-decoration: none; color: #1e293b; font-weight: bold; }
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #2563eb;
+    text-transform: uppercase;
+}
 
-/* ГАЛЕРЕЯ (GRID) */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    text-align: center;
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+}
+
+.counters {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+}
+
+.counter-item h2 {
+    font-size: 3rem;
+    color: #2563eb;
+    -webkit-text-fill-color: #2563eb; /* Отключаем градиент для цифр */
+}
+
+/* --- КАРТОЧКА "ОБО МНЕ" И НАВЫКИ --- */
+.about-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.skill-card {
+    background: #2563eb;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+/* --- ГАЛЕРЕЯ ПРОЕКТОВ (GRID) --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -51,11 +128,20 @@ section h2 {
 }
 
 .gallery-item img {
-    width: 100%; height: 250px; object-fit: cover;
-    border-radius: 15px; cursor: pointer; transition: 0.3s;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.4s;
 }
 
-/* ТАРИФЫ (GRID) */
+.gallery-item img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* --- ТАРИФЫ (PRICING) --- */
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -63,37 +149,90 @@ section h2 {
 }
 
 .price-card {
-    background: white; padding: 40px; border-radius: 20px;
-    text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
 }
 
-/* 3. ОТСТУП КНОПКИ В ТАРИФАХ 5PX */
-.price-card ul { list-style: none; margin-bottom: 25px; }
+.price-card ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+/* --- 3. ПУНКТ КУРАТОРА: ОТСТУП 5px ОТ ТЕКСТА ДО КНОПКИ --- */
 .btn-select {
-    margin-top: 5px; /* Строго 5px */
-    width: 100%; padding: 12px; border-radius: 10px;
-    border: none; background: #2563eb; color: white; cursor: pointer;
+    margin-top: 5px; /* Строго по заданию */
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* FAQ (ACCORDION) */
-.accordion-item { background: white; margin-bottom: 10px; border-radius: 10px; overflow: hidden; }
-.accordion-header { padding: 20px; cursor: pointer; font-weight: bold; background: #fff; border-bottom: 1px solid #eee; }
-.accordion-content { display: none; padding: 20px; color: #64748b; }
+.price-card.selected {
+    border: 3px solid #25d366 !important;
+}
 
-/* LIGHTBOX */
+/* --- FAQ (ACCORDION) --- */
+.accordion-item {
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.accordion-header {
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.accordion-content {
+    display: none;
+    padding: 20px;
+    color: #64748b;
+}
+
+/* --- LIGHTBOX (ГАЛЕРЕЯ) --- */
 .lightbox {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
 }
-.lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-.close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 3rem; cursor: pointer; }
 
-/* АНИМИРОВАННЫЕ СЧЕТЧИКИ */
-.counters { display: flex; justify-content: center; gap: 50px; margin-top: 20px; }
-.counter-item h2 { font-size: 3rem; color: #2563eb; }
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+}
 
-/* АДАПТИВНОСТЬ */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
 @media (max-width: 768px) {
     .nav-links { display: none; }
-    .counters { flex-direction: column; text-align: center; }
+    .hero h1 { font-size: 2.5rem; }
+    .counters { flex-direction: column; gap: 20px; }
 }
