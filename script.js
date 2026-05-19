@@ -1,116 +1,125 @@
-// Жұмысты бастамас бұрын барлық элементтерді жүктеп алу
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. LIGHTBOX GALLERY ---
+
+    // 1. LIGHTBOX — анимациямен
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.close-btn');
 
-    document.querySelectorAll('.gallery-item img').forEach(image => {
-        image.addEventListener('click', () => {
-            lightbox.style.display = 'flex';
-            lightboxImg.src = image.src;
+    const openLightbox = (src) => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = src;
+        lightbox.classList.remove('closing');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.add('closing');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            lightbox.classList.remove('closing');
+        }, 300);
+    };
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            if (img) openLightbox(img.src);
         });
     });
 
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.display = 'none';
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
     });
 
-    // --- 2. ACCORDION FAQ ---
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.style.display === 'flex') closeLightbox();
+    });
 
-    accordionHeaders.forEach(header => {
+    // 2. ACCORDION
+    document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
+            const item = header.parentElement;
             const content = header.nextElementSibling;
-            
-            // Басқа ашық тұрғандарын жабу
-            document.querySelectorAll('.accordion-content').forEach(item => {
-                if (item !== content) {
-                    item.style.display = 'none';
-                }
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.accordion-content').style.display = 'none';
             });
 
-            // Ағымдағы блокты ашу немесе жабу
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-            } else {
+            if (!isOpen) {
+                item.classList.add('open');
                 content.style.display = 'block';
             }
         });
     });
-// Логика выбора тарифа
-const priceButtons = document.querySelectorAll('.btn-select');
 
-priceButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // 1. Находим все карточки тарифов
-        const allCards = document.querySelectorAll('.price-card');
-        
-        // 2. Убираем класс 'selected' и меняем текст кнопок у всех
-        allCards.forEach(card => {
-            card.classList.remove('selected');
-            card.querySelector('.btn-select').innerText = 'Выбрать';
+    // 3. PRICING SELECT
+    document.querySelectorAll('.btn-select').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.price-card').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('.btn-select').innerText = 'Выбрать';
+            });
+            const currentCard = button.closest('.price-card');
+            currentCard.classList.add('selected');
+            button.innerText = 'Выбрано ✓';
         });
-
-        // 3. Добавляем класс 'selected' только той карточке, чью кнопку нажали
-        const currentCard = button.closest('.price-card');
-        currentCard.classList.add('selected');
-        
-        // 4. Меняем текст на кнопке
-        button.innerText = 'Выбрано ✓';
     });
-});
-    // --- 5. ANIMATED COUNTERS ---
+
+    // 4. ANIMATED COUNTERS (ОБНОВЛЕНО: Исправлен шаг анимации для маленьких чисел)
     const counters = document.querySelectorAll('.counter');
-    const speed = 100; // Жылдамдығы
+    let countersStarted = false;
 
     const animateCounters = () => {
         counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / speed;
-
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            
+            // Если целевое значение маленькое (например, 2 или 4), увеличиваем по 1, иначе рассчитываем шаг
+            const inc = target.toFixed() <= 5 ? 1 : Math.max(1, Math.ceil(target / 80));
+            
+            const update = () => {
+                count += inc;
                 if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 25);
+                    counter.innerText = count;
+                    setTimeout(update, 35); // Слегка увеличили задержку для плавности маленьких чисел
                 } else {
                     counter.innerText = target;
                 }
             };
-            updateCount();
+            update();
         });
     };
 
-    // Скролл кезінде счетчикті бір-ақ рет қосу үшін
-    let started = false;
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100 && !started) {
-            animateCounters();
-            started = true;
+    const heroSection = document.querySelector('#hero');
+    
+    // ОБНОВЛЕНО: Изменен порог threshold на 0.15 и уменьшена задержка запуска до 200мс,
+    // чтобы анимация срабатывала идеально под новую компактную высоту CSS.
+    const counterObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !countersStarted) {
+            setTimeout(animateCounters, 200); 
+            countersStarted = true;
         }
-    });
+    }, { threshold: 0.15 }); 
 
-});
-// Эффект появления блоков при скролле (Эксклюзивность)
-const revealSections = () => {
-    const observer = new IntersectionObserver((entries) => {
+    if (heroSection) counterObserver.observe(heroSection);
+    // 5. SCROLL REVEAL
+    const revealElements = document.querySelectorAll('section, .skill-card, .price-card, .gallery-item');
+    revealElements.forEach(el => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
-    document.querySelectorAll('section').forEach(section => {
-        section.style.opacity = "0";
-        section.style.transform = "translateY(30px)";
-        section.style.transition = "all 0.8s ease-out";
-        observer.observe(section);
-    });
-};
+    revealElements.forEach(el => revealObserver.observe(el));
 
-// Запускаем после загрузки
-window.addEventListener('load', revealSections);
+});
