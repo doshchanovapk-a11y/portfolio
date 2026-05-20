@@ -14,7 +14,7 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
+ 
   <!-- Dark background with rounded corners -->
   <rect width="32" height="32" rx="8" fill="#0a0a0f"/>
 
