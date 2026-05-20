@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.classList.remove('closing');
         document.body.style.overflow = 'hidden';
     };
-
+ 
     const closeLightbox = () => {
         lightbox.classList.add('closing');
         document.body.style.overflow = '';
