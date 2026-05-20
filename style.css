@@ -18,7 +18,7 @@
     --inner-gap: 20px;
     --footer-gap: 100px;
 }
-
+ 
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
